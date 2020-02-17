@@ -1,0 +1,224 @@
+﻿@model SuperStore.ViewModel.PurchaseViewModel
+
+@{
+    ViewBag.Title = "AddProduct";
+}
+
+<link href="~/Content/bower_components/toastr/toastr.min.css" rel="stylesheet" />
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script src="~/Content/bower_components/toastr/toastr.min.js"></script>
+<script src="~/Scripts/App/Service/PurchaseService.js"></script>
+<script src="~/Scripts/App/Controller/PurchasedController.js"></script>
+
+<style>
+    .addCreateGrid {
+        background: rgba(0, 0, 0, 0) url("../../Images/details_open.png") no-repeat scroll 0 0;
+        cursor: pointer;
+        float: left;
+        height: 20px;
+        margin-top: 4px;
+        width: 20px;
+    }
+
+    .removeCreateGrid {
+        background: url("../../Images/details_close.png") no-repeat;
+        cursor: pointer;
+        float: left;
+        height: 20px;
+        margin-top: 4px;
+        width: 20px;
+    }
+
+    .gridInside {
+        margin-bottom: 20px;
+    }
+</style>
+
+<br />
+<h4 class="charts-main-title">
+    <a href="/Home/Index">My Dashboard</a>
+    <span class="fa fa-arrow-right"></span>
+    <span class="breadcrumb-item"><a href="/Purchse/Index">Purchsed Products</a></span>
+    <span class="fa fa-arrow-right"></span>
+    <span class="breadcrumb-item">Purchse New Product</span>
+</h4>
+
+<div class="form-horizontal">
+    <hr />
+
+    <div class="form-group">
+        <div class="col-md-4">
+            @Html.LabelFor(model => model.SupplierId, htmlAttributes: new { @class = "control-label col-md-4" })
+            <div class="col-md-8">
+                @Html.DropDownList("supplierId", new SelectList(Model.listSupplier.OrderBy(x => x.SupplierId), "SupplierId", "Name"), new { @class = "form-control" })
+            </div>
+        </div>
+        <div class="col-md-4">
+            @Html.LabelFor(model => model.CategoryId, htmlAttributes: new { @class = "control-label col-md-4" })
+            <div class="col-md-8">
+                @Html.DropDownList("CategoryId", new SelectList(Model.listCategory.OrderBy(x => x.CategoryId), "CategoryId", "CategoryName"), new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.CategoryId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="col-md-4">
+            @Html.LabelFor(model => model.SubCategoryId, htmlAttributes: new { @class = "control-label col-md-4" })
+            <div class="col-md-8">
+                @Html.DropDownList("SubCategoryId", new SelectList(string.Empty, "Value", "Text"), new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.SubCategoryId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>
+
+
+
+    <div class="creat-ticket-inner">
+        @using (Html.BeginForm())
+            {
+            <div id="ParentContainer">
+                <div class="row" style="background-color:limegreen;padding:10px;">
+                    <div class="col-md-12 no-padding divGrid">
+                        <div class="col-md-3" style="text-align:center;">
+                            <label>Product</label>
+                        </div>
+                        <div class="col-md-2" style="text-align:center;">
+                            <label>Unit</label>
+                        </div>
+                        <div class="col-md-2" style="text-align:center;">
+                            <label>Cost Price</label>
+                        </div>
+                        <div class="col-md-2" style="text-align:center;">
+                            <label>Sale Price</label>
+                        </div>
+                        <div class="col-md-1" style="text-align:center;">
+                            <label>Quantity</label>
+                        </div>
+                        <div class="col-md-1" style="text-align:center;">
+                            <label>Sub Total</label>
+                        </div>
+                        <div></div>
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+                <br />
+                <div class="row divgrid" id="divCreateContainer">
+                    <div class="col-md-12 no-padding gridInside">
+
+                        <div class="col-md-3 col-sm-12 col-xs-12">
+                            @Html.DropDownList("ProductId", new SelectList(string.Empty, "Value", "Text"), new { @class = "form-control" })
+                        </div>
+
+                        <div class="col-md-2 col-sm-12 col-xs-12">
+                            @Html.DropDownList("UnitId", new SelectList(Model.listUnit.OrderBy(x => x.UnitId), "UnitId", "Name"), new { @class = "form-control Unit" })
+                        </div>
+
+                        <div class="col-md-2 col-sm-12 col-xs-12">
+                            @*<input type="text" class="form-control CostPrice" id="CostPrice" placeholder="Enter Price">*@
+                            @Html.TextBox("CostPrice", null, new { @id = "CostPrice", @class = "form-control CostPrice", @placeholder = "Enter Cost Price" })
+                        </div>
+                        <div class="col-md-2 col-sm-12 col-xs-12">
+                            @*<input type="text" class="form-control CostPrice" id="CostPrice" placeholder="Enter Price">*@
+                            @Html.TextBox("RetailPrice", null, new { @id = "RetailPrice", @class = "form-control RetailPrice", @placeholder = "Enter Sale Price" })
+                        </div>
+                        <div class="col-md-1 col-sm-12 col-xs-12">
+                            @*<input type="text" class="form-control Unit" id="Unit" placeholder="Unit">*@
+                            @Html.TextBox("Quantity", null, new { @id = "Quantity", @class = "form-control Quantity", @placeholder = "Quantity" })
+                        </div>
+                        <div class="col-md-1 col-sm-12 col-xs-12 no-padding">
+                            <input type="text" class="form-control Subtotal" id="Subtotal" placeholder="Sub Total">
+                        </div>
+
+
+
+                        <div class="col-md-1 col-sm-12 col-xs-12">
+                            <img class="col-md-2 col-sm-2 col-xs-12 no-padding addCreateGrid" alt=""
+                                 title="Add More" onclick="PurchasedController.AddCreateGrid();">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="col-md-12">
+                <div class="col-md-7">
+                    @*<img src="~/Images/0525computerpurchase.jpg" height="300" width="400" />*@
+                </div>
+
+                <div class="col-md-5">
+                    <div class="col-md-12">
+                        <label class="col-md-4 no-padding">Total<span style="font-size:10px;"> (Excluding Vat)</span></label>
+                        <div class="col-md-8 no-padding">
+                            @Html.TextBoxFor(model => model.TotalPrice, new { @class = "form-control", @readonly = "true" })
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                    <br />
+                    <div class="col-md-12">
+                        <label class="col-md-4 no-padding">Discount</label>
+                        <div class="col-md-8 no-padding">
+                            @Html.TextBoxFor(model => model.Discount, new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                    <br />
+                    <div class="col-md-12">
+                        <label class="col-md-4 no-padding">Net Total</label>
+                        <div class="col-md-8 no-padding">
+                            <input type="text" id="netTotal" name="netTotal" class="form-control" />
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                    <br />
+                    <div class="col-md-12">
+                        <label class="col-md-4 no-padding">Payment Method</label>
+                        <div class="col-md-8 no-padding">
+                            <select id="ddlPaymentMethod" class="form-control">
+                                <option value="1">Cash</option>
+                                <option value="2">Credit</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                    <br />
+                    <div class="col-md-12">
+                        <label class="col-md-4 no-padding">Paid</label>
+                        <div class="col-md-8 no-padding">
+                            @Html.TextBoxFor(model => model.Paid, new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                    <br />
+                    <div class="col-md-12">
+                        <label class="col-md-4 no-padding">Due</label>
+                        <div class="col-md-8 no-padding">
+                            @Html.TextBoxFor(model => model.Due, new { @class = "form-control", @readonly = "true" })
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                    <br />
+                    <div class="col-md-12 no-padding">
+                        <button class="btn btn-primary pull-right" onclick="PurchasedController.PurchasedProduct()">SAVE</button>
+                    </div>
+                    <div class="clear"></div>
+                    <br />
+                    <br />
+                </div>
+            </div>
+        }
+    </div>
+
+</div>
+
+<script type="text/javascript">
+    $('#CategoryId').change(function () {
+        PurchasedController.LoadSubcategory("#CategoryId");
+    });
+    $('#SubCategoryId').change(function () {
+        debugger;
+        PurchasedController.LoadProductBySubcategory("#SubCategoryId");
+    });
+
+    $(".CostPrice").on("click", function () {
+        var parent = $(this).parent().parent().attr('id');
+        var val = $(parent).find("");
+    })
+</script>

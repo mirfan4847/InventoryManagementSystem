@@ -1,0 +1,76 @@
+﻿@model IEnumerable<SuperStore.ViewModel.SubCategoryViewModel>
+@using SuperStore.Common
+@{
+    Layout = null;
+    ViewBag.Title = "GetAll";
+    int counter = 1;
+}
+@*@Html.ActionLink("Create New Sub Category", "AddSubCategory")*@
+<br />
+
+<table id="SubcategoryTable" class="table">
+    <thead>
+        <tr>
+            <th>Sr#</th>
+            <th>Sub Category</th>
+            <th>Category</th>
+            <th>Created By</th>
+            <th>Action</th>
+        </tr>
+        <tr class="filters_1" style="display:none;">
+            <th></th>
+            <th>Sub Category</th>
+            <th>Category</th>
+            <th>Created By</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+            {
+            <tr>
+                <td>@(counter++)</td>
+                <td>@item.SubCategoryName</td>
+                <td>@item.CategoryName</td>
+                <td>@item.CreatedUser <br /> @item.CreatedDate</td>
+                <td>
+                    <table>
+                        <tr>
+                            <td>
+                                <a href="/SubCategory/Edit/@item.SubCategoryId" class="btn btn-primary">
+
+                                    <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+                                </a>
+                            </td>
+                            <td>
+                                &nbsp;&nbsp;
+                                &nbsp;&nbsp;
+                            </td>
+                            <td>
+                                <button class="btn btn-danger" id="subcategory" title="Expire Contract" data-toggle="modal" data-target="#@item.SubCategoryId"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button>
+                            </td>
+                        </tr>
+                    </table>
+
+                </td>
+            </tr>
+
+            <div id="@item.SubCategoryId" class="modal fade">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-body">
+                            <br />
+                            <h3 class="text-center">Are you sure you want to delete this category?</h3>
+                        </div>
+                        <div class="modal-footer" style="border-top:none !important;">
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">No</button>
+                            <a href="/SubCategory/Deactive/@EncryptDecrypt.EncryptId(item.SubCategoryId.ToString())" class="btn btn-success">
+                                Yes
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        }
+    </tbody>
+</table>

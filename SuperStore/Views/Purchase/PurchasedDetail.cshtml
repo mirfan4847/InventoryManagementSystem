@@ -1,0 +1,51 @@
+﻿@model IEnumerable<SuperStore.ViewModel.PurchaseDetailViewModel>
+
+@{
+    ViewBag.Title = "PurchasedDetail";
+}
+
+<br />
+<h4 class="charts-main-title">
+    <a href="/Home/Index">My Dashboard</a>
+    <span class="fa fa-arrow-right"></span>
+    <span class="breadcrumb-item"><a href="/Purchase/Index">All Purchased Products</a></span>
+    <span class="fa fa-arrow-right"></span>
+    <span class="breadcrumb-item">Purchased Products Detail</span>
+</h4>
+
+
+<br />
+@foreach (var item in Model)
+            {
+    <div class="col-lg-3 col-md-3 col-xs-6">
+        <a class="thumbnail" style="padding:20px;color:black;">
+            @if (string.IsNullOrEmpty(item.Impage))
+            {
+                <img class="img-thumbnail"
+                     src="~/Images/notAvailable.jpg"
+                     alt="Image not found" style="height:110px;width:130px;">
+            }
+            else
+            {
+                <img class="img-thumbnail"
+                     src="~/Images/@item.Impage"
+                     alt="Image not found" style="height:110px;width:130px;">
+            }
+            <br />
+            <p><strong> Name:</strong> @item.Productname</p>
+            <p><strong> Purchase Price:</strong> @item.RetailPrice</p>
+            <p><strong> Quantity:</strong> @item.Quantity</p>
+        </a>
+    </div>
+
+    @*<div class="col-lg-3 col-md-4 col-xs-6 thumb">
+            <a class="thumbnail" href="#" data-image-id="" data-toggle="modal" data-title="Im so nice"
+               data-image="https://images.pexels.com/photos/158971/pexels-photo-158971.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
+               data-target="#image-gallery">
+                <img class="img-thumbnail"
+                     src="https://images.pexels.com/photos/158971/pexels-photo-158971.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
+                     alt="Another alt text">
+            </a>
+        </div>*@
+}
+

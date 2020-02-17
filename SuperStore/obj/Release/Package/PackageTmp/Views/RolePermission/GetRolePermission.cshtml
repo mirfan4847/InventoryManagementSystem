@@ -1,0 +1,77 @@
+﻿@model SuperStore.ViewModel.RolePermissionViewModel
+    @{
+        int count = 1;
+        int scount = 1;
+        Layout = null;
+    }
+
+<script src="~/Scripts/App/Service/InterfaceService.js"></script>
+<script src="~/Scripts/App/Controller/InterfaceController.js"></script>
+<style>
+    .arrow-btn-col .btn {
+    margin-top: 1em;
+}
+    .align-center {
+    text-align: center;
+}
+</style>
+
+    <div id="wrapperEditRole" class="add-user-cont partial-center col-md-6 no-padding">
+       @using (Html.BeginForm("AddRole", "User", FormMethod.Post, new { @id = "addroleform" }))
+        {
+            <div class="add-user-content dash-trained-col col-md-12 no-padding">             
+              
+                <div class="row no-margin col-md-12">
+                    <div class="col-sm-5 no-padding">
+                        <label class="col-md-12 form-lable no-padding">Available Interfaces::</label>
+                        <div class="col-md-12 no-padding">
+
+                            <select id="Interfaces" name="Interfaces" multiple="multiple" class="form-control" style="height: 300px;">
+                                @foreach (var item in Model.Interfaces)
+                                {
+                                    <option value="@item.InterfaceId">@count)@item.Name</option>
+                                    count++;
+                                }
+                            </select>
+                            @* @Html.DropDownListFor(model => model.Interfaces, new SelectList(Model.Interfaces, "InterfaceId", "InterfaceName"), "---Select One---", new { @class = "form-control", @multiple = "multiple" })*@
+                        </div>
+                    </div>
+                    <div class="col-sm-2 align-center arrow-btn-col" style="padding-top:50px;">
+                        <div class="col-sm-2 align-center arrow-btn-col">
+                            <a onclick="InterfaceController.MoveSingleRole('Interfaces', 'SelectedInterfaces');" class="btn btn-primary">&gt;</a>
+                            <a onclick="InterfaceController.MoveTotalRoles('Interfaces', 'SelectedInterfaces');" class="btn btn-primary">&gt;&gt;</a>
+                            <hr />
+                            <a onclick="InterfaceController.MoveSingleRole('SelectedInterfaces', 'Interfaces');" class="btn btn-primary"><</a>
+                            <a onclick="InterfaceController.MoveTotalRoles('SelectedInterfaces', 'Interfaces');" class="btn btn-primary"><<</a>
+                        </div>
+                    </div>
+                    <div class="col-sm-5 no-padding">
+                        <label class="col-md-12 form-lable no-padding">Selected Interfaces:</label>
+                        <div class="col-md-12 no-padding">
+                            <select id="SelectedInterfaces" name="SelectedInterfaces" multiple="multiple" class="form-control" style="height: 300px;">
+                                @if (Model.SelectedInterfaces != null)
+                                {
+                                    foreach (var item in Model.SelectedInterfaces)
+                                    {
+                                        <option value="@item.InterfaceId">@scount)@item.Name</option>
+                                        scount++;
+                                    }
+                                }
+                            </select>
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                    <br />
+                    <div class="col-md-12 no-padding">
+                        <a class="btn btn-primary pull-right dash-del-btn" onclick="InterfaceController.AddRolePermission();">Save</a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+    <script type="text/javascript">
+        $('.close-link').click(function () {
+            var $add_user_panle = $(this).closest('.add-user-cont');
+            $add_user_panle.remove();
+        });
+    </script>

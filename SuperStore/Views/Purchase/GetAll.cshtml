@@ -1,0 +1,78 @@
+﻿@model IEnumerable<SuperStore.ViewModel.PurchaseViewModel>
+@using SuperStore.Common;
+@{
+    ViewBag.Title = "GetAll";
+    Layout = null;
+    int counter = 1;
+}
+
+<table class="table" id="tblpurchase">
+    <thead>
+        <tr>
+            <td>Sr#</td>
+            <th>Receipt NO.</th>
+            <th>TotalPrice</th>
+            <th>Discount</th>
+            <th>Method</th>
+            <th>Paid</th>
+            <th>Due</th>
+            <th>CreatedBy</th>
+            <th></th>
+        </tr>
+        <tr style="display:none;" class="filters_1">
+            <td>Sr#</td>
+            <th>Receipt No.</th>
+            <th>TotalPrice</th>
+            <th>Discount</th>
+            <th>Method</th>
+            <th>Paid</th>
+            <th>Due</th>
+            <th>CreatedBy</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@(counter++)</td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ReceiptNo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TotalPrice)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Discount)
+                </td>
+                <td>
+                   @item.Method
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Paid)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Due)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CreatedUser)
+                    <br />
+                    @Html.DisplayFor(modelItem => item.CreatedDate)
+                </td>
+                <td>
+                    <table>
+                        <tr>                           
+                            <td>
+                                <a href="/Purchase/PurchasedDetail/@EncryptDecrypt.EncryptId(item.ProductPurchseId.ToString())" class="btn btn-warning">
+
+                                    <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>
+                                </a>
+                            </td>
+                        </tr>
+                    </table>
+
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

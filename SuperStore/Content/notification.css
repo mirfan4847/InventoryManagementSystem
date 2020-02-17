@@ -1,0 +1,83 @@
+﻿.navbar-nav .open .dropdown-menu.msg_list {
+    width: 300px;
+}
+.navbar-nav .open .dropdown-menu {
+    background: #ffffff none repeat scroll 0 0;
+    border: 1px solid #d9dee4;
+    left: auto;
+    margin-top: 0;
+    position: absolute;
+    right: 0;
+    width: 220px;
+}
+.notifiction-scroll{
+        max-height:400px;
+        overflow-y:auto;
+}
+span.NotifiedBySpan {
+    padding: 1px 5px;
+}
+a.noti-link {
+    padding: 0px !important;
+    margin-left: -6px;
+}  
+
+span.NotifiedBySpan {
+    width: 100%;
+    float: left;
+    margin-top: 1px;
+} 
+span.time {
+    float: right;
+}
+.navbar-nav > li > .dropdown-menu {
+    margin-top: 0;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+}
+.top_nav .navbar-right li {
+    display: inline-block;
+    float: right;
+    position: static;
+}
+ul.msg_list li {
+    background: #f7f7f7 none repeat scroll 0 0;
+    display: flex;
+    margin: 6px 6px 0;
+    padding: 5px;
+    width: 96% !important;
+}
+ul.msg_list li a {
+    padding: 3px 5px !important;
+}
+.dropdown-menu > li > a {
+    display: block;
+    padding: 3px 20px;
+    clear: both;
+    font-weight: 400;
+    line-height: 1.42857143;
+    color: #333;
+    white-space: nowrap;
+}
+.dropdown-menu.msg_list span {
+    white-space: normal;
+}
+.noti-new {
+    background-color: #6fc080;
+    font-size: 0.8em;
+    padding: 4px 10px;
+    color: #fff;
+    border-radius: 4px;
+    display: inline-block;
+}
+ul.msg_list li a .time {
+    font-size: 11px;
+    font-style: italic;
+    font-weight: 400;
+    position: absolute;
+    right: 35px;
+}
+ul.msg_list li a .message {
+    display: block !important;
+    font-size: 11px;
+}

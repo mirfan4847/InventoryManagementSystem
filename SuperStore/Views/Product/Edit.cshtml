@@ -1,0 +1,200 @@
+﻿@model SuperStore.ViewModel.ProductViewModel
+
+@{
+    ViewBag.Title = "Edit";
+}
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script src="~/Scripts/App/Service/ProductService.js"></script>
+<script src="~/Scripts/App/Controller/ProductController.js"></script>
+
+<script>
+    function RandomNumber() {
+        debugger;
+        $('#Code').val(Math.floor(Math.random() * 1000000000));
+    };
+
+
+    $('#btnAttachmentDeploymentCreateParent').click(function () {
+        debugger;
+        $("input[id='fileUploadDeploymentCreateParent']").click();
+    });
+    $('#fileUploadDeploymentCreateParent').on('change', function () {
+        var data = new FormData();
+        var formData = new FormData();
+        var Size = 0;
+        var totalFiles = document.getElementById("fileUploadDeploymentCreateParent").files.length;
+        for (var i = 0; i < totalFiles; i++) {
+            var file = document.getElementById("fileUploadDeploymentCreateParent").files[i];
+            Size = Size + file.size;
+            formData.append("imageUploadForm", file);
+        }
+        if (Size > 4000000) {
+            toastr.error('File Should Not More than 4MB');
+            return false;
+        }
+        var ajaxRequest = $.ajax({
+            type: "POST",
+            url: "/Product/CreateNewAttachment",
+            contentType: false,
+            processData: false,
+            data: formData,
+            failure: function (response) {
+                alert("Request: " + response.toString());
+            },
+            success: function (data) {
+                var strVal = data;
+                //console.log(data);
+                $.each(data, function (index, file) {
+                    if (file != ".File Is Not Allowed") {
+                        var filename = index;
+                        if (filename.length > 11)
+                            filename = filename.substr(0, 8) + '..';
+                        var span = '<span class="label label-default attach" id="' + file + '">' + filename + '<li class="glyphicon glyphicon-remove-sign" style="cursor:pointer;"></li></span>';
+                        $("#atch").append(span);
+                    }
+                    else {
+                        toastr.error('File Is Not Allowed');
+                    }
+                });
+            }
+        });
+    });
+
+</script>
+
+<h4 class="charts-main-title">
+    <a href="/Home/Index">My Dashboard</a>
+    <span class="fa fa-arrow-right"></span>
+    <span class="breadcrumb-item">Update Product</span>
+</h4>
+<h3>Update Product</h3>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(x => x.ProductId)
+
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-4">
+                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+            </div>
+
+            @Html.LabelFor(model => model.Code, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-4">
+                @Html.EditorFor(model => model.Code, new { htmlAttributes = new { @class = "form-control", @readonly = "True", style = "font-size:25px;" } })
+                @Html.ValidationMessageFor(model => model.Code, "", new { @class = "text-danger" })
+            </div>
+            @*<span class="btn btn-info col-md-1" onclick="RandomNumber()"><i class="fa fa-random"></i> </span>*@
+        </div>
+
+
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.CategoryId, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-4">
+                @Html.DropDownList("CategoryId", new SelectList(Model.listCategory, "CategoryId", "CategoryName", Model.CategoryId), new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.CategoryId, "", new { @class = "text-danger" })
+            </div>
+
+            @Html.LabelFor(model => model.SubCategoryId, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-4">
+                @Html.DropDownList("SubCategoryId", new SelectList(Model.listSubCategory, "SubCategoryId", "SubCategoryName", Model.SubCategoryId), new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.SubCategoryId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group" style="display:none;">
+            @Html.LabelFor(model => model.CostPrice, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-4">
+                @Html.EditorFor(model => model.CostPrice, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.CostPrice, "", new { @class = "text-danger" })
+            </div>
+
+            @Html.LabelFor(model => model.RetailPrice, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-4">
+                @Html.EditorFor(model => model.RetailPrice, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.RetailPrice, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group" style="display:none;">
+            @Html.LabelFor(model => model.TaxId, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-4">
+                @Html.DropDownList("TaxId", new SelectList(Model.listTax, "TaxId", "TaxName", Model.TaxId), new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.TaxId, "", new { @class = "text-danger" })
+            </div>
+
+            @Html.LabelFor(model => model.Unit, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-4">
+                @Html.EditorFor(model => model.Unit, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Unit, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Image, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-2">
+                <input id="imgInp" type="file" name="file" />
+                <img id="blah" />
+            </div>
+        </div>
+
+        @*<div class="row col-md-12" id="Attachementsdiv">
+                <button type="button" class="btn btn-attachment" id="btnAttachmentDeploymentCreateParent">
+                    <i class="glyphicon glyphicon-paperclip icon-white"></i> Attachment
+                </button>
+                <input type="file" id="fileUploadDeploymentCreateParent" style="display: none;" />
+                <span id="atch" class="row"></span>
+                <input type="hidden" id="savePerviousValueCommentDeploymentCreateParent" value="">
+            </div>*@
+
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-4">
+                @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Update" class="btn btn-primary" />
+            </div>
+        </div>
+    </div>
+}
+
+<script>
+    $('#CategoryId').change(function () {
+        ProductController.LoadSubcategory("#CategoryId");
+    });
+
+
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                debugger;
+                $('#blah').attr('src', e.target.result);
+                $('#blah').attr("width", '100px;');
+                $('#blah').attr("height", '100px;');
+            }
+
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+
+    $("#imgInp").change(function () {
+        readURL(this);
+    });
+</script>
+

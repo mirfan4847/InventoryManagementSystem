@@ -1,0 +1,42 @@
+﻿@model SuperStore.ViewModel.UsersViewModel
+@using CaptchaMvc.HtmlHelpers
+@{
+    ViewBag.Title = "Login";
+    Layout = null;
+}
+<title>AdminLTE 2 | Dashboard</title>
+<link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+
+<div class="col-md-4">
+</div>
+<div class="col-md-4 center" style="top:20%;">
+
+    <div class="login-panel panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">Sign In</h3>
+        </div>
+        <div class="panel-body">
+            @using (Html.BeginForm("Login", "Users", FormMethod.Post))
+            {
+                <fieldset>
+                    <div class="form-group">
+                        @Html.TextBoxFor(x => x.Username, new { @class = "form-control", placeholder = "Username" })
+                    </div>
+                    <div class="form-group">
+                        @Html.PasswordFor(x => x.Password, new { @class = "form-control", placeholder = "Password" })
+                    </div>
+                    @*<div class="checkbox">
+                            <label>
+                                <input name="remember" type="checkbox" value="Remember Me">Remember Me
+                            </label>
+                        </div>*@
+                    <input type="submit" class="btn btn-primary btn-sm" value="Login" />
+                    <div style="text-align:center">
+                        @Html.ActionLink("Create New User", "Registration", "Users")
+                    </div>
+                    @*@Html.MathCaptcha()*@
+                </fieldset>
+            }
+        </div>
+    </div>
+</div>

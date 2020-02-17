@@ -1,0 +1,122 @@
+﻿@model SuperStore.ViewModel.SaleViewModel
+
+@{
+    ViewBag.Title = "SaleDetail";
+}
+
+
+<link href="~/Content/bower_components/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet" />
+<link href="~/Content/bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css" rel="stylesheet" />
+<link href="~/Content/bootstrap-select.min.css" rel="stylesheet" />
+<link href="~/Content/bower_components/toastr/toastr.min.css" rel="stylesheet" />
+
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script src="~/Content/bower_components/moment/min/moment.min.js"></script>
+<script src="~/Content/bower_components/bootstrap-daterangepicker/daterangepicker.js"></script>
+<!-- bootstrap datepicker -->
+<script src="~/Content/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
+<!-- bootstrap color picker -->
+<script src="~/Scripts/bootstrap-select.min.js"></script>
+<script src="~/Content/bower_components/toastr/toastr.min.js"></script>
+<script src="~/Scripts/App/Service/SaleService.js"></script>
+<script src="~/Scripts/App/Controller/SaleController.js"></script>
+
+
+<style>
+    .charts-main-title {
+        color: #000000;
+    }
+
+    .breadcrumb-item {
+        color: #000000;
+    }
+
+    .dataTables_wrapper .row:first-child {
+        background-color: #5087c8;
+        color: #ffffff;
+        margin: 0;
+        padding: 10px 0 6px;
+    }
+</style>
+
+<h4 class="charts-main-title">
+    <a href="/Home/Index">My Dashboard</a>
+    <span class="fa fa-arrow-right"></span>
+    <span class="breadcrumb-item">Sale Detail</span>
+</h4>
+<h3>Sale Detail</h3>
+<br />
+<div class="col-sm-6 col-md-3 col-xs-12 input-main-col no-padding" id="divMultiSelectProduct">
+    @Html.DropDownList("ProductId", new SelectList(Model.listProduct, "ProductId", "Name"), new { @class = "form-control dropdown-arrow selectpicker  changeable", multiple = "multiple", data_actions_box = "true", data_live_search = "true", title = "Select Product" })
+</div>
+
+
+<div class="form-group col-md-3">
+    @Html.LabelFor(model => model.FromDate, "From Date", htmlAttributes: new { @class = "control-label col-md-4 no-padding" })
+    <div class="col-md-8 no-padding">
+        @Html.TextBoxFor(model => model.FromDate, new { @class = "form-control", @Value = "" })
+        @Html.ValidationMessageFor(model => model.FromDate, "", new { @class = "text-danger" })
+    </div>
+</div>
+
+
+<div class="form-group col-md-3">
+    @Html.LabelFor(model => model.ToDate, "To Date", htmlAttributes: new { @class = "control-label col-md-4 no-padding" })
+    <div class="col-md-8 no-padding">
+        @Html.TextBoxFor(model => model.ToDate, new { @class = "form-control", @Value = "" })
+        @Html.ValidationMessageFor(model => model.ToDate, "", new { @class = "text-danger" })
+    </div>
+</div>
+
+@*<div class="col-sm-6 col-md-2 col-xs-12 input-main-col">
+        <div class="input-group">
+            <button type="button" class="btn btn-default pull-right" id="daterange-btn">
+                <span id="daterangepicker">
+                    <i class="fa fa-calendar"></i> Date range picker
+                </span>
+                <i class="fa fa-caret-down"></i>
+            </button>
+        </div>
+    </div>*@
+
+<div class="col-sm-6 col-md-2 col-xs-12 input-main-col" style="margin-left:10px;">
+    <div class="col-md-offset-2 col-md-4">
+        <input type="button" value="Search" class="btn btn-primary pull-right" onclick="SaleController.GetSaleDetail();" />
+    </div>
+</div>
+
+<div class="clearfix"></div>
+<br />
+<div id="loadSaleDetail"></div>
+
+
+<script>
+    $('#FromDate').datepicker({
+        autoclose: true
+    })
+    $('#ToDate').datepicker({
+        autoclose: true
+    })
+
+
+    $('#daterange-btn').daterangepicker(
+    {
+        ranges: {
+            'Today': [moment(), moment()],
+            'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+            'Last 7 Days': [moment().subtract(6, 'days'), moment()],
+            'Last 30 Days': [moment().subtract(29, 'days'), moment()],
+            'This Month': [moment().startOf('month'), moment().endOf('month')],
+            'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+        },
+        startDate: moment().subtract(29, 'days'),
+        endDate: moment()
+    },
+    function (start, end) {
+        // $('#daterange-btn span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'))
+        $('#daterange-btn span').html(start.format('DD/MM/YYYY') + ' - ' + end.format('DD/MM/YYYY'))
+    }
+  )
+</script>
+
+

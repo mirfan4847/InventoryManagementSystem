@@ -1,0 +1,46 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script src="~/Scripts/App/Service/SupplierService.js"></script>
+<script src="~/Scripts/App/Controller/SupplierController.js"></script>
+<style>
+    .charts-main-title {
+        color: #000000;
+    }
+
+    .breadcrumb-item {
+        color: #000000;
+    }
+
+    .dataTables_wrapper .row:first-child {
+        background-color: #5087c8;
+        color: #ffffff;
+        margin: 0;
+        padding: 10px 0 6px;
+    }
+</style>
+<script>
+    SupplierController.LoadSupplier();
+</script>
+<h4 class="charts-main-title">
+    <a href="/Home/Index">My Dashboard</a>
+    <span class="fa fa-arrow-right"></span>
+    <span class="breadcrumb-item">Sub Category</span>
+</h4>
+<a href="/Supplier/AddSupplier" class="btn btn-success btn-md">
+    <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"> Create</span>
+</a>
+<div class="clearfix"></div>
+<br />
+
+
+<div id="loadSupplier">
+
+</div>
+
+
+
+

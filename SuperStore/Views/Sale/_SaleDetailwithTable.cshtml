@@ -1,0 +1,58 @@
+﻿@model IEnumerable<SuperStore.Proc_ViewModel.Get_SaleDetailByProductIdAndDateViewModel>
+@using SuperStore.Common;
+@{
+    int counter = 1;
+}
+<table class="table" id="saleTable">
+    <thead>
+        <tr>
+            <th>Sr#</th>
+            <th>
+                Product Name
+            </th>
+
+            @*<th>
+                Price
+            </th>*@
+            <th>
+                Quantity
+            </th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+            {
+            <tr>
+                <td>
+                    @(counter++)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ProductName)
+                </td>
+
+                @*<td>
+                    @Html.DisplayFor(modelItem => item.Price)
+                </td>*@
+                <td>
+                    @Html.DisplayFor(modelItem => item.Quantity)
+                </td>
+
+                <td>
+                    <table>
+                        <tr>
+                            <td>
+                                <a href="/Sale/GetProductSaleDetailByProductId/@EncryptDecrypt.EncryptId(item.ProductId.ToString())" class="btn btn-warning" target="_blank">
+
+                                    <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>
+                                </a>
+                            </td>
+                        </tr>
+                    </table>
+
+                </td>
+            </tr>
+            
+        }
+    </tbody>
+</table>

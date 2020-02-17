@@ -1,0 +1,84 @@
+﻿@model IEnumerable<SuperStore.ViewModel.SaleViewModel>
+@using SuperStore.Common;
+@{
+    ViewBag.Title = "GetAll";
+    Layout = null;
+    int counter = 1;
+}
+
+<table class="table" id="tblSale">
+    <thead>
+        <tr>
+            @*<td>Sr#</td>*@
+            <th>Receipt#</th>
+            <th>Net Price</th>
+            <th>Discount</th>
+            <th>Paid</th>
+            <th>Due</th>
+            <th>Payment Type</th>
+            <th>Customer</th>
+            <th>Created By</th>
+            <th>Action</th>
+        </tr>
+        <tr class="filters_1">
+            @*<td>Sr#</td>*@
+            <th>Receipt#</th>
+            <th>Net Price</th>
+            <th>Discount</th>
+            <th>Paid</th>
+            <th>Due</th>
+            <th>Payment Type</th>
+            <th>Customer</th>
+            <th>Created By</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                @*<td>@(counter++)</td>*@
+                <td>
+                    @Html.DisplayFor(modelItem => item.ReceiptNo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NetPrice)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Discount)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Paid)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Due)
+                </td>
+
+                <td>
+                    @item.PaymentType
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.customerName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SoldBy)
+                    <br />
+                    @Html.DisplayFor(modelItem => item.CreatedDate)
+                </td>
+                <td>
+                    <table>
+                        <tr>
+                            <td>
+                                <a href="/Sale/GetSaleDetailBySaleId/@item.SaleId" class="btn btn-warning">
+
+                                    <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>
+                                </a>
+                            </td>
+                        </tr>
+                    </table>
+
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

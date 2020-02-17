@@ -1,0 +1,237 @@
+.chat-div {
+    width: 350px;
+    height: 100%;
+    position: fixed;
+    background-color: rgba(0, 0, 0, 0.9);
+    top: 0;
+    right: 0px;
+    z-index: 9999;
+    bottom: 0;
+    color: #fff;
+    /*overflow-y: scroll;*/
+}
+.chat-top-bar {
+    border-bottom: 1px solid #444;
+    margin-bottom: 1.2em;
+}
+.arrow-back {
+    float: left;
+    font-size: 2em;
+    /*padding: 0 15px;*/
+    margin: 8px 0.4em;
+    cursor: pointer;
+}
+.arrow-back .fa {
+    padding: 0 15px;
+}
+.chat-top-txt {
+    float: left;
+    text-align: center;
+    padding: 14px 10px;
+    font-size: 1.5em;
+}
+/*.chat-tabs-main {
+    padding: 0 20px;
+
+}*/
+#pills-tab.nav-pills > li > a {
+    border-radius: 4px;
+    color: #acacac;
+}
+#pills-tab.nav-pills > li.active > a,
+#pills-tab.nav-pills > li.active > a:focus,
+#pills-tab.nav-pills > li.active > a:hover {
+    background-color: #fff !important;
+    color: #000 !important;
+}
+#pills-tab {
+    padding: 0 20px;
+}
+.chat-contacts-list .list-group-flush {
+    padding: 0 20px;
+    padding-right: 20px;
+    overflow-y: auto;
+    height: 30em;
+}
+#pills-add .chat-contacts-list .list-group-flush {
+    height: 35em;
+    margin-bottom: 0;
+}
+#pills-add .chat-contacts-list .list-group-item {
+    padding-right: 20px;
+}
+.search-user-cont {
+    width: 88%;
+    margin: 12px auto;
+}
+#search-tickts {
+    background-color: rgba(95, 95, 95, 0.7);
+    border-radius: 0;
+    border: none;
+    color: #fff;
+}
+.chat-close-btn-rgt {
+    float: right;
+    margin-right: 12px;
+    margin-top: 1em;
+    cursor: pointer;
+}
+.chat-close-btn-rgt i {
+    /*border: 1px solid #D0D0D0;*/
+    text-align: center;
+    vertical-align: top;
+    border-radius: 2px;
+    padding: 2px 5px 5px;
+    font-size: 1em;
+    color: #FFFFFF;
+    /*box-shadow: 0px 0px 3px #FFFFFF inset;*/
+}
+#pills-recent .searched-ticket-cont {
+    font-size: 12px;
+}
+.searched-ticket-cont {
+    display: block;
+    padding: 0 20px;
+    padding: 10px 22px 11px;
+    border-bottom: 1px solid #444;
+    margin-bottom: 1em;
+    font-size: 1.1em;
+}
+.searched-ticket-cont i {
+    margin-right: 5px;
+}
+.chat-contacts-list .list-group-flush {
+    padding: 0 20px;
+    padding-right: 0;
+}
+.all-user-recents-today {
+    height: auto !important;
+    /*overflow-y: auto !important;*/
+}
+.all-user-recents-prev {
+    height: auto !important;
+}
+.chat-contacts-list {
+    overflow: auto;
+    height: 36em;
+}
+.chat-contacts-list .list-group-item:first-child {
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+}
+.chat-contacts-list .list-group-item {
+    padding: 10px 0px;
+    background-color: transparent;
+    border: 0;
+    font-size: 1.1em;
+    cursor: pointer;
+}
+.chat-contacts-list .list-group-item .fa {
+    margin-right: 13px;
+    color: #B6B6B6;
+}
+.chat-contacts-list .fa-green-icon {
+    color: #65cc0b !important;
+}
+.chat-contacts-list .badge {
+    color: #d73a3a;
+    background-color: transparent;
+    border: 1px solid #d73a3a;
+}
+#pills-add .badge {
+    color: #fff;
+    border: 1px solid #fff;
+}
+.chat-tabs-main .list-group-item.active > .badge,
+.chat-tabs-main .nav-pills > .active > a > .badge {
+    color: #fff;
+    background-color: #d73a3a;
+}
+#livechat-btn {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    z-index: 9;
+    display: none;
+    cursor: pointer;
+}
+.chatbox-innner {
+    padding: 0 35px;
+}
+.chat-txtng-box {
+    /*height: 32em;*/
+    overflow-y: auto;
+    position: absolute;
+    height: 66%;
+    bottom: 60px;
+    top: 18%;
+    width: 80%;
+    left: 10%;
+}
+.chatbox-main {
+    display: none;
+}
+.cht-sender-name {
+    display: block;
+    padding: 6px 0px;
+    font-weight: bold;
+    color: #b3b3b3;
+}
+.msgs-main-cont.animate-greetng {
+    transform: scale(1);
+}
+.msgs-main-cont {
+    transform: scale(0);
+    transition: all .3s ease-in;
+}
+.cht-sender-msg {
+    display: block;
+    word-wrap: break-word;
+    margin-bottom: 1em;
+}
+.chat-typing-box {
+    background-color: rgba(62, 62, 62, 0.8);
+    position: absolute;
+    bottom: 0em;
+    width: 100%;
+    padding: 0;
+    height: 60px;
+    left: 0%;
+}
+#chat-typing-input {
+    float: left;
+    color: #000;
+    background-color: transparent;
+    width: 84%;
+    border: none;
+    padding: 5px 15px;
+    word-wrap: break-word;
+    overflow: hidden;
+    overflow-y: auto;
+    height: 40px !important;
+    margin: 15px 0 0;
+    resize: none;
+    color: #fff;
+}
+.chat-send-btn {
+    float: right;
+    margin-right: 12px;
+    margin-top: 14px;
+    font-size: 1.2em;
+    padding: 5px;
+    cursor: pointer;
+    color: #aaa;
+}
+.ref-chat-cont {
+    display: block;
+    padding: 0 20px;
+    padding: 10px 22px 11px;
+    font-size: 1.2em;
+}
+@media (max-width:495px){
+    .chat-div {width: 320px;}
+    .chat-contacts-list .list-group-flush {height: 25em;}
+    .chat-contacts-list {
+        height: 28em;
+    }
+}

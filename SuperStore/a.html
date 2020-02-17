@@ -1,0 +1,79 @@
+
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>::.. LiveAdmins Dashboard ..::</title>
+        <link rel="stylesheet" href="bootstrap.min.css">
+        <link rel="stylesheet" href="style.css">
+        <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=0" />
+        <link rel="shortcut icon" href="<?php echo site_url('assets/images/LA-Favicon.jpg'); ?>">
+        <script type="text/javascript" src="https://code.jquery.com/jquery-1.10.0.min.js"></script>
+        <script>
+			$(document).ready(function() {
+				$("#register-form").validate({
+					errorElement: "span",
+					rules: {
+						password: {required: true, minlength: 5, maxlength: 25, },
+						repassword: {required: true, equalTo: "#password", minlength: 5, maxlength: 25, }
+					},
+					messages: {
+						password: {required: "<div class='clear'></div>Pasword is required..", },
+						repassword: {required: "<div class='clear'></div>Retype Password is required..", }
+					},
+					errorPlacement: function(error, element) {
+						error.appendTo(element.parent());
+					}
+				});
+			});
+		</script>
+    </head>
+    <body>
+        <!-- NAVIGATION START -->
+        <div class="navbar navbar-default nav_bar" style="font: menu;">
+            <div class="container" style="padding-top: 5px;">
+                <div class="navbar-header col-sm-4 col-xs-12">
+                    <a href="<?php echo site_url('index.php/dashboard/index'); ?>"><img class="logo-img" src="https://les.thelivechatsoftware.com/les/assets/images/logo.png" alt="LiveAdmin Logo" /></a>
+                </div>
+                <div class="navbar-header col-sm-4">
+                    <div class="tagline main-heading">LiveAdmins Dashboard</div>
+                </div>
+            </div>
+        </div>
+        <!-- NAVIGATION END -->
+        <div class="clr"></div>
+        <!-- CONTECT START --> 
+        <div class="container content">
+            <!-- PERSONAL INFORMATION FORM START -->
+            
+            <div class="section-one admin-form">
+                <form class="form-horizontal" action="/les/index.php/reset_password/update" method="post" id="register-form">
+                    <fieldset>
+                        <legend>Reset Password</legend>
+                        <?php if ($code_exists['status'] == 1) { ?>
+                    		<div class="form-group">
+                                <label for="inputEmail" class="col-lg-12">New Password<span class="imp-field">*</span></label>
+                                <div class="col-lg-12">
+                                    <input type="password"  class="form-control required" name="password" id="password" maxlength="50" autocomplete="off" required/>
+                                   
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="inputEmail" class="col-lg-12">Retype Password<span class="imp-field">*</span></label>
+                                <div class="col-lg-12">
+                                    <input type="password"  class="form-control required" name="repassword" id="repassword" maxlength="50" autocomplete="off" required/>
+                                    
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-lg-12 text-right">
+                                    <input name="login" type="submit" class="btn btn-primary nav_bar" value="Save">
+                                </div>
+                            </div>
+                        
+                        
+                    </fieldset>
+                </form>
+            <!-- PERSONAL INFORMATION FORM END -->
+        </div>
+<!-- CONTECT END -->

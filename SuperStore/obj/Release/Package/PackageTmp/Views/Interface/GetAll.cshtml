@@ -1,0 +1,90 @@
+﻿@model IEnumerable<SuperStore.ViewModel.InterfaceViewModel>
+@using SuperStore.Common
+
+@{
+    Layout = null;
+    int counter = 1;
+}
+
+<table class="table" id="tblInterface">
+    <thead>
+        <tr>
+            <th>Sr#</th>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+
+            <th></th>
+        </tr>
+        <tr class="filters" style="display:none;">
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@(counter++)</td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+
+                <td>
+                    <table>
+                        <tr>
+                            <td>
+                                <a href="/Interface/Edit/@EncryptDecrypt.EncryptId(item.InterfaceId.ToString())" class="btn btn-primary">
+
+                                    <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+                                </a>
+                            </td>
+                            <td>
+                                &nbsp;&nbsp;
+                                &nbsp;&nbsp;
+                            </td>
+                            <td>
+                                <button class="btn btn-danger" id="CloseContract" title="Expire Contract" data-toggle="modal" data-target="#@item.InterfaceId"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button>
+
+                                @*<a href="/Interface/Deactive/@EncryptDecrypt.EncryptId(item.InterfaceId.ToString())" class="btn btn-danger">
+
+                                    <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+                                </a>*@
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+
+            <div id="@item.InterfaceId" class="modal fade">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-body">
+                            <br />
+                            <h3 class="text-center">Are you sure you want to delete this interface?</h3>
+                        </div>
+                        <div class="modal-footer" style="border-top:none !important;">
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">No</button>
+                            <a href="/Interface/Deactive/@EncryptDecrypt.EncryptId(item.InterfaceId.ToString())" class="btn btn-success">
+                                Yes
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        }
+    </tbody>
+</table>

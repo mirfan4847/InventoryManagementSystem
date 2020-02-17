@@ -1,0 +1,13 @@
+﻿
+@{
+    ViewBag.Title = "UploadBulkProduct";
+}
+
+@using (Html.BeginForm("UploadMultipleFiles", "Product", FormMethod.Post,
+                                        new { enctype = "multipart/form-data" }))
+{
+    <label for="postedFile">Upload Image:</label>
+    <input type="file" name="postedFile" id="postedFile" style="width: 100%;" />
+    <input type="submit" value="Upload" class="submit" />
+}
+

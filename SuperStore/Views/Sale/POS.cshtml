@@ -1,0 +1,160 @@
+﻿@model SuperStore.ViewModel.POSViewModel
+@{
+    ViewBag.Title = "WG Client Dashboard : Tickets";
+    var isTickerInterface = true;
+    Layout = null;
+}
+
+<link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+
+<style>
+    .filters input {
+        width: 100%;
+        padding: 3px;
+        box-sizing: border-box;
+    }
+</style>
+<style>
+    .tab-slider {
+        padding: 0 40px;
+        position: relative;
+    }
+
+        .tab-slider .btn-icon {
+            position: absolute;
+            top: 0;
+            padding: 9px 11px;
+        }
+
+    #goPrev {
+        left: 0;
+    }
+
+    #goNext {
+        right: 0;
+    }
+
+    .wrap {
+        overflow: hidden;
+        /*position: relative;*/
+        white-space: nowrap;
+        width: 100%;
+        /*border: 1px solid #efefef;*/
+        font-size: 0;
+    }
+
+    .nav-tabs > li.active > a,
+    .nav-tabs > li.active > a:focus,
+    .nav-tabs > li.active > a:hover {
+        border: 1px solid transparent;
+    }
+
+    .wrap > .nav-tabs {
+        display: inline-block;
+        padding: 0;
+        margin: 0;
+        position: relative;
+        top: 0;
+        left: 0;
+    }
+
+        .wrap > .nav-tabs > li {
+            background: #fff;
+            display: inline-block;
+            position: relative;
+            white-space: normal;
+            float: none;
+            font-size: 14px;
+            float: left;
+            margin-bottom: 9px;
+        }
+
+    .nav-tabs > li > a {
+        margin-right: 0;
+        border-radius: 0;
+    }
+</style>
+
+<div id="tickets-tabs">
+    <div class="tab-slider">
+        <div class="wrap">
+            <ul id="menus" class="nav nav-pills nav-tabs">
+                @foreach (var item in Model.Categorylist)
+                {
+                    <li class="active">
+                        <a id="open" href="#open-tickets" data-id="1" data-toggle="tab" data-target="open-tickets">@item.CategoryName</a>
+                    </li>
+                }
+            </ul>
+        </div>
+    </div>
+    <div class="tab-content clearfix">
+        <div class="tab-pane active" id="open-tickets">
+        </div>
+    </div>
+</div>
+
+
+
+<script type="text/javascript">
+
+    $(document).ready(function() {
+        var tickerInterface = @isTickerInterface.ToString().ToLower();
+        $('a[data-toggle="tab"]').on('shown.bs.tab',
+            function(e) {
+
+                var target = $(e.target).attr("href") // activated tab
+
+                datatargetValues = target.substring(1);
+                var tabValue = $('a[data-target="' + datatargetValues + '"]').attr('id', target);
+                TicketController.TicketListingPartial(tabValue);
+
+                setCookiets('selected-tab', target);
+                //$("#" + target).trigger('click');
+            });
+
+        function getCookiets(key) {
+            return $.cookie(key);
+            //var keyValue = document.cookie.match('(^|;) ?' + key + '=([^;]*)(;|$)');
+            //return keyValue ? keyValue[2] : null;
+        };
+
+        function setCookiets(key, value) {
+
+
+            $.cookie(key, value, { expires: 7, path: '/' });
+
+            //var expires = new Date();
+            //expires.setTime(expires.getTime() + (1 * 24 * 60 * 60 * 1000));
+            //document.cookie = key + '=' + value + ';expires=' + expires.toUTCString();
+        };
+
+        var cookieValues = getCookiets('selected-tab');
+        var tabValue;
+        if (cookieValues != null) {
+
+
+            //var value = "#" + cookieValues;
+            datatargetValues = cookieValues.substring(1);
+            tabValue = $('a[data-target="' + datatargetValues + '"]').attr('href', cookieValues);
+            TicketController.TicketListingPartial(tabValue);
+
+            $("#menus li.active").removeClass("active");
+            $('a[data-target="' + datatargetValues + '"]').parent().addClass("active");
+            AppController.Show();
+            //$(value).trigger('click');
+
+        } else {
+            //$('#open').trigger('click');
+            if(!tickerInterface){
+                tabValue = $('a[data-target="open-tickets"]').attr('href', "#open-tickets");
+            }
+            else
+            {
+                tabValue = $('a[data-target="all-TickerTickets"]').attr('href', "#all-TickerTickets");
+            }
+            TicketController.TicketListingPartial(tabValue);
+        }
+    });
+
+</script>

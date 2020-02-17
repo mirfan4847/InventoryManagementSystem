@@ -1,0 +1,71 @@
+﻿@model SuperStore.ViewModel.UsersViewModel
+@{
+    ViewBag.Title = "Login";
+    Layout = null;
+}
+<title>AdminLTE 2 | Dashboard</title>
+<link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+<link href="~/Content/bower_components/toastr/toastr.min.css" rel="stylesheet" />
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script src="~/Scripts/App/Service/UserService.js"></script>
+<script src="~/Scripts/App/Controller/UserController.js"></script>
+<script src="~/Content/bower_components/toastr/toastr.min.js"></script>
+
+<div class="col-md-4">
+</div>
+<div class="col-md-4 center" style="top:7%;">
+
+    <div class="login-panel panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">Registration</h3>
+        </div>
+        <div class="panel-body">
+            @using (Html.BeginForm("Registration", "Users", FormMethod.Post))
+            {
+                <fieldset>
+                    <div class="form-group">
+                        @Html.EditorFor(model => model.Firstname, new { htmlAttributes = new { @class = "form-control", placeholder = "First Name" } })
+                        @Html.ValidationMessageFor(model => model.Firstname, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="form-group">
+                        @Html.EditorFor(model => model.Lastname, new { htmlAttributes = new { @class = "form-control", placeholder = "Last Name" } })
+                        @Html.ValidationMessageFor(model => model.Lastname, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="form-group">
+                        @Html.EditorFor(model => model.Phone, new { htmlAttributes = new { @class = "form-control", placeholder = "Phone" } })
+                        @Html.ValidationMessageFor(model => model.Phone, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="form-group">
+                        @Html.EditorFor(model => model.Address, new { htmlAttributes = new { @class = "form-control", placeholder = "Address" } })
+                        @Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="form-group">
+                        @Html.EditorFor(model => model.Username, new { htmlAttributes = new { @class = "form-control", placeholder = "Username or Email" } })
+                        @Html.ValidationMessageFor(model => model.Username, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="form-group">
+                        @Html.PasswordFor(model => model.Password, new { @class = "form-control", placeholder = "Password" })
+                        @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="form-group">
+                        @Html.PasswordFor(model => model.ConfirmPassword, new { @class = "form-control", placeholder = "Confirm Password" })
+                        @Html.ValidationMessageFor(model => model.ConfirmPassword, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div style="text-align:right">
+                        <input type="submit" class="btn btn-primary btn-md" value="Save" onclick="UserController.Registration(); return false;" />
+                    </div>
+                    @Html.ActionLink("Back to login", "Login", "Users")
+
+                </fieldset>
+    }
+        </div>
+    </div>
+</div>
+

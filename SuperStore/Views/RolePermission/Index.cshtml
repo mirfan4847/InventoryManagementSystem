@@ -1,0 +1,27 @@
+﻿@model SuperStore.ViewModel.RolePermissionViewModel
+@{
+    ViewBag.Title = "Index";
+}
+<h4 class="charts-main-title">
+    <a href="/Home/Index">My Dashboard</a>
+    <span class="fa fa-arrow-right"></span>
+    <span class="breadcrumb-item">Role Permissions</span>
+</h4>
+<h3>Role Permissions</h3>
+<div class="col-md-4">
+    <label>Role Name:</label>
+    @Html.DropDownList("RoleId", new SelectList(Model.Roles, "RoleId", "Name"), new { @class = "form-control" })
+</div>
+<div class="clearfix"></div>
+<br />
+<div id="loadRolePermissionData"></div>
+
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script>
+    $('#RoleId').on('change', function () {
+        debugger;
+        $.post("/RolePermission/GetRolePermission", { RoleId: $('#RoleId').val() }, function (data) {
+            $('#loadRolePermissionData').html(data);
+        });
+    });
+</script>

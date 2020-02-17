@@ -1,0 +1,77 @@
+﻿@model IEnumerable<SuperStore.ViewModel.UnitViewModel>
+
+@{
+    ViewBag.Title = "GetAll";
+    Layout = null;
+}
+
+<table class="table" id="UnitTable">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            string modelId = System.Guid.NewGuid().ToString().Substring(0, 6);
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+
+                <td>
+                    <table>
+                        <tr>
+                            <td>
+                                <a href="/Unit/Edit/@item.UnitId" class="btn btn-primary">
+
+                                    <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+                                </a>
+                            </td>
+                            <td>
+                                &nbsp;&nbsp;
+                                &nbsp;&nbsp;
+                            </td>
+                            <td>
+                                @*<a href="/Unit/Deactive/@item.UnitId" class="btn btn-danger">
+
+                                    <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+                                </a>*@
+
+                                <button class="btn btn-danger" title="Deactive Unit" data-toggle="modal" data-target="#@modelId"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button>
+
+                                <div id="@modelId" class="modal fade">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-body">
+                                                <br />
+                                                <h3 class="text-center">Are you sure you want to deactive this unit?</h3>
+                                            </div>
+                                            <div class="modal-footer" style="border-top:none !important;">
+                                                <button type="button" class="btn btn-danger" data-dismiss="modal">No</button>
+                                                <button onclick="UnitController.Deactiveunit('@item.UnitId')" data-dismiss="modal" id="closeContractYesBtn" class="btn btn-success">Yes</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+
+

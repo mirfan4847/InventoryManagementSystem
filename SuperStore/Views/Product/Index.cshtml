@@ -1,0 +1,35 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script src="~/Scripts/App/Service/ProductService.js"></script>
+<script src="~/Scripts/App/Controller/ProductController.js"></script>
+
+<style>
+    .dataTables_wrapper .row:first-child {
+        background-color: #5087c8;
+        color: #ffffff;
+        margin: 0;
+        padding: 10px 0 6px;
+    }
+</style>
+
+<script type="text/javascript">
+    ProductController.LoadProduct();
+</script>
+
+<h4 class="charts-main-title">
+    <a href="/Home/Index">My Dashboard</a>
+    <span class="fa fa-arrow-right"></span>
+    <span class="breadcrumb-item">Products</span>
+</h4>
+<a href="/Product/AddProduct" class="btn btn-success btn-md">
+    <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"> Create</span>
+</a>
+<br />
+<div id="loadProduct">
+
+</div>
+

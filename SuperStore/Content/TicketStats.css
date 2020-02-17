@@ -1,0 +1,333 @@
+﻿body {
+    background-color: transparent;
+}
+
+.filters input {
+    width: 100%;
+    padding: 3px;
+    box-sizing: border-box;
+}
+
+.wrap {
+    overflow: hidden;
+    /*position: relative;*/
+    white-space: nowrap;
+    width: 100%;
+    /*border: 1px solid #efefef;*/
+    font-size: 0;
+}
+
+.filters_1 input {
+    width: 100%;
+    padding: 3px;
+    box-sizing: border-box;
+}
+
+.ui-dialog {
+    z-index: 99999 !important;
+}
+/*------ Css added on 6-12-17 -----*/
+.filters > th:nth-child(1) input {
+    display: none;
+}
+
+.filters input {
+    width: 100%;
+    padding: 3px;
+    box-sizing: border-box;
+}
+
+#tickets-tabs .tab-slider .slick-list {
+    width: 90%;
+}
+
+#tickets-tabs #menus {
+    padding: 0;
+    /*width: 100%;*/
+}
+
+#tickets-tabs .tab-slider .slick-next {
+    right: 15px !important;
+}
+
+#tickets-tabs .tab-slider .slick-prev {
+    left: auto;
+    right: 40px !important;
+}
+
+.slick-slide a {
+    background-color: #ececec;
+    border: medium none !important;
+    color: #000000;
+    display: block;
+    height: 30px;
+    margin: 0 2px;
+    padding-top: 6px;
+    text-align: center;
+    /*width: 100px;*/
+}
+
+.slick-prev::before, .slick-next::before {
+    color: #000000 !important;
+}
+
+.slick-dots * {
+    font-family: Arial;
+    font-size: 11px !important;
+}
+
+#tickets-tabs .tab-slider * {
+    font-size: 12px;
+}
+
+/*----- Css end 6-12-17 ----*/
+.tab-slider {
+    padding: 0px;
+    position: relative;
+}
+
+    .tab-slider .btn-icon {
+        position: absolute;
+        top: 0;
+        padding: 9px 11px;
+        display: none;
+    }
+
+#goPrev {
+    left: 0;
+}
+
+#goNext {
+    right: 0;
+}
+
+.wrap {
+    overflow: hidden;
+    /*position: relative;*/
+    white-space: nowrap;
+    width: 100%;
+    /*border: 1px solid #efefef;*/
+    font-size: 0;
+}
+
+.nav-tabs > li.active > a,
+.nav-tabs > li.active > a:focus,
+.nav-tabs > li.active > a:hover {
+    border: 1px solid transparent;
+}
+
+.wrap > .nav-tabs {
+    display: inline-block;
+    padding: 0;
+    margin: 0;
+    position: relative;
+    top: 0;
+    left: 0;
+}
+
+    .wrap > .nav-tabs > li {
+        background: #fff;
+        display: inline-block;
+        position: relative;
+        white-space: normal;
+        float: none;
+        font-size: 14px;
+    }
+
+.nav-tabs > li > a {
+    margin-right: 0;
+    border-radius: 0;
+}
+
+/*--- reports css  ---*/
+
+.reports-main {
+    background-color: #6e6e6e;
+    padding: 10px 0;
+}
+
+#reports-nav-btn, #navbar-header {
+    display: block !important;
+    background-color: transparent;
+    border: none;
+    margin-top: 6px;
+}
+
+#reports-nav-items li a {
+    padding: 12px 21px;
+    color: #fff !important;
+    font-weight: bold;
+    display: block;
+    cursor: pointer;
+}
+
+#reports-nav-items ul, #reports-nav-items ul li {
+    padding: 0;
+    list-style: none;
+}
+
+#reports-nav-items li a {
+    padding: 10px 10px;
+    color: #fff !important;
+    font-weight: bold;
+}
+
+#myHeader.sticky #reports-nav-items {
+    top: 4.2em;
+}
+
+#reports-nav-items {
+    position: absolute;
+    left: 0;
+    width: 250px;
+    background-color: rgba(0, 0, 0, 0.8);
+    height: 100%;
+    top: 4.21em;
+    z-index: 12;
+    bottom: 0;
+    min-height: 46em;
+    display: none;
+    overflow: hidden;
+    overflow-y: auto;
+}
+
+.list-grps-mains-btm .list-group-item-text {
+    color: #fff !important;
+}
+
+#reports-nav-btn .icon-bar {
+    display: block;
+    border: 1px solid #fff;
+    margin: 4px 0;
+    width: 27px !important;
+}
+
+.rpts-rgt-cont {
+    text-align: center;
+}
+
+.rpts-mid-content .btn.dropdown-toggle {
+    background-color: transparent !important;
+    color: #fff !important;
+    border: none;
+    box-shadow: 0 0;
+    border-radius: 0 0;
+}
+
+.rpts-mid-content {
+    text-align: center;
+    padding: 4px 0 !important;
+}
+
+.ticket-rgt-icon {
+    color: #fff;
+    font-size: 24px;
+}
+
+.reports-content-main .x_title th {
+    color: #fff;
+}
+
+.clearfix {
+    clear: both;
+}
+
+.date-slct-drpdn {
+    text-align: center;
+}
+
+.btn-sbmit {
+    background-color: #009E0F;
+    color: #fff;
+    border: none;
+    margin: 0 12px;
+}
+
+.rpts-mid-content .dropdown-menu {
+    padding: 30px 0px 20px;
+    min-width: 320px;
+    left: -78px;
+}
+
+.rpts-mid-content .form-control {
+    margin-bottom: 0;
+    padding: 2px 0;
+}
+
+.margin-top-50 {
+    margin-top: 50px;
+}
+
+.list-grps-mains-btm .list-group-item-text {
+    color: #fff;
+}
+
+.reports-content-inner {
+    margin: 0 auto;
+    float: none;
+    padding: 0;
+}
+
+.tickets-main-wrapper .right_col {
+    padding-left: 0;
+}
+
+.col-lg-1, .col-lg-10, .col-lg-11, .col-lg-12, .col-lg-2, .col-lg-3, .col-lg-4, .col-lg-5, .col-lg-6, .col-lg-7, .col-lg-8, .col-lg-9, .col-md-1, .col-md-10, .col-md-11, .col-md-12, .col-md-2, .col-md-3, .col-md-4, .col-md-5, .col-md-6, .col-md-7, .col-md-8, .col-md-9, .col-sm-1, .col-sm-10, .col-sm-11, .col-sm-12, .col-sm-2, .col-sm-3, .col-sm-4, .col-sm-5, .col-sm-6, .col-sm-7, .col-sm-8, .col-sm-9, .col-xs-1, .col-xs-10, .col-xs-11, .col-xs-12, .col-xs-2, .col-xs-3, .col-xs-4, .col-xs-5, .col-xs-6, .col-xs-7, .col-xs-8, .col-xs-9 {
+    position: unset !important;
+}
+
+.compny-dp-main {
+    margin: 20px auto;
+    text-align: center;
+}
+
+.slct-opt-lable {
+    color: #fff;
+    margin-right: 15px;
+    font-size: 1.12em;
+    font-weight: normal;
+}
+
+#myHeader.sticky {
+    position: fixed !important;
+    width: 100%;
+    top: 0;
+    z-index: 999;
+}
+
+    #myHeader.sticky + .reports-content-main {
+        padding-top: 102px;
+    }
+
+#rpts-daterange-picker {
+    border: 0;
+    padding: 4px 12px;
+    border-radius: 3px;
+    color: #fff;
+    cursor: pointer;
+    background-color: transparent;
+}
+
+.rpts-mid-content .fa.fa-caret-down {
+    margin-left: -15px;
+    color: #fff;
+}
+
+
+@media (max-width:480px) {
+    .charts-main-title {
+        font-size: 1.9em;
+    }
+
+    .rpts-mid-content .form-control {
+        margin: 0;
+    }
+
+    #reports-nav-items {
+        top: 9.453em;
+    }
+}
+
+.list-grps-mains-btm .list-group-item-text {
+    color: #fff !important;
+}

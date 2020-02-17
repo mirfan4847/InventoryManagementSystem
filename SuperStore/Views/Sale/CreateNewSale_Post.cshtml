@@ -1,0 +1,142 @@
+﻿@model IEnumerable<SuperStore.ViewModel.SaleViewModel>
+@{
+    ViewBag.Title = "PurchasedPro_Post";
+    int counter = 1;
+}
+
+<br />
+<br />
+<input type="hidden" value="@Model" id="productModel" />
+@if (Model.Any(x => x.ProductId != 0))
+{
+    <table class="table table-bordered" id="PurchaseTable">
+        <thead>
+            <tr style="background-color:#ccc">
+                <th>Sr#</th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ProductName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.UnitName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Price)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Quantity)
+                </th>
+                <th>Sub Total</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr id="divCreateContainer@(counter)">
+                    <td>
+                        @(counter++)
+                    </td>
+
+                    <td>
+                        <input type="hidden" value="@item.ProductId" class="ProductId" />
+                        @Html.DisplayFor(modelItem => item.ProductName)
+                    </td>
+                    <td>
+                        <input type="hidden" value="@item.unitId" class="UnitId" />
+                        @Html.DisplayFor(modelItem => item.UnitName)
+                    </td>
+                    <td>
+                        <input type="hidden" value="@item.Price" class="Price" />
+                        <label>@item.Price</label>
+                    </td>
+
+                    <td>
+                        <input type="hidden" value="@item.Quantity" class="Quantity" />
+                        <label>@item.Quantity</label>
+                    </td>
+                    <td>
+                        <label id="SubTotal@(counter)">@item.SubTotal</label>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <div>
+        <div class="col-md-7"></div>
+        <div class="col-md-5">
+            <div class="col-md-12">
+                <label class="col-md-4 no-padding">Total<span style="font-size:10px;"> (Excluding Vat)</span></label>
+                <div class="col-md-8 no-padding">
+                    <input type="text" id="txtTotalAmount" value="@Model.Sum(x => x.SubTotal)" class="form-control" readonly="readonly" />
+                </div>
+            </div>
+            <div class="clearfix"></div>
+            <br />
+            <div class="col-md-12">
+                <label class="col-md-4 no-padding">Discount</label>
+                <div class="col-md-8 no-padding">
+                    <input type="text" class="form-control" id="txtdiscount" />
+                </div>
+            </div>
+            <div class="clearfix"></div>
+            <br />
+            <div class="col-md-12">
+                <label class="col-md-4 no-padding">Net Total</label>
+                <div class="col-md-8 no-padding">
+                    <input type="text" id="netTotal" readonly="readonly" name="netTotal" class="form-control" />
+                </div>
+            </div>
+            <div class="clearfix"></div>
+            <br />
+            <div class="col-md-12">
+                <label class="col-md-4 no-padding">Payment Method</label>
+                <div class="col-md-8 no-padding">
+                    <select id="ddlPaymentMethod" class="form-control">
+                        <option value="1">Cash</option>
+                        <option value="2">Credit</option>
+                    </select>
+                </div>
+            </div>
+            <div class="clearfix"></div>
+            <br />
+            <div class="col-md-12">
+                <label class="col-md-4 no-padding">Paid</label>
+                <div class="col-md-8 no-padding">
+                    <input type="text" id="txtPaid" class="form-control" />
+                </div>
+            </div>
+            <div class="clearfix"></div>
+            <br />
+            <div class="col-md-12">
+                <label class="col-md-4 no-padding">Due</label>
+                <div class="col-md-8 no-padding">
+                    <input type="text" id="txtDue" class="form-control" readonly="readonly" />
+                </div>
+            </div>
+            <div class="clearfix"></div>
+            <br />
+            <div class="col-md-12 no-padding">
+                <button class="btn btn-primary pull-right" onclick="SaleController.SaleItem()">SAVE</button>
+            </div>
+            <div class="clear"></div>
+            <br />
+            <br />
+        </div>
+    </div>
+}
+<script type="text/javascript">
+    var i = 0;
+    $("#txtdiscount").on("keyup", function () {
+        if ($(this).val() == "")
+            $("#netTotal").val('');
+        else
+            $("#netTotal").val(parseFloat($("#txtTotalAmount").val()) - (parseFloat($(this).val()) + i));
+    });
+    $("#txtPaid").on("keyup", function () {
+        if ($(this).val() == "")
+            $("#txtDue").val('');
+        else
+            $("#txtDue").val(parseFloat($("#netTotal").val()) - (parseFloat($(this).val()) + i));
+    });
+
+</script>

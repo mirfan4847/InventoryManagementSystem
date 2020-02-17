@@ -1,0 +1,69 @@
+﻿@model IEnumerable<SuperStore.ViewModel.SaleViewModel>
+@{
+    ViewBag.Title = "CustomerPurchase";
+}
+<link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+<link href="~/Content/dataTables.bootstrap.min.css" rel="stylesheet" />
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script src="~/Scripts/jquery.dataTables.min.js"></script>
+
+<style>
+   
+
+    .table .row:first-child {
+        background-color: #5087c8;
+        color: #ffffff;
+        margin: 0;
+        padding: 10px 0 6px;
+    }
+</style>
+<h2>CustomerPurchase</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <td>Receipt#</td>
+            <td>NetPrice</td>
+            <td>Discount</td>
+            <td>Paid</td>
+            <td>Due</td>
+            <td>Sold By</td>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.ReceiptNo</td>
+                <td>@item.NetPrice</td>
+                <td>@item.Paid</td>
+                <td>@item.Discount</td>
+                <td>@item.Due</td>
+                <td>
+                    @item.SoldUser
+                    <br />
+                    @item.CreatedDate
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<script>
+    $('.table').DataTable({
+        // dom: 'lBfrtip',
+        "order": [],
+        columnDefs: [{ orderable: false, targets: 'no-sort' }],
+        lengthChange: true,
+        responsive: true,
+        orderCellsTop: true,
+        "pageLength": 50,
+        "bDestroy": true,
+        "sPaginationType": "full_numbers",
+        "oTableTools": {
+            "aButtons": ["copy", "xls", "pdf"]
+        }
+
+    });
+</script>
+

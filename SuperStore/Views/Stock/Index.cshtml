@@ -1,0 +1,68 @@
+﻿@model SuperStore.ViewModel.StockViewModel
+
+@{
+    ViewBag.Title = "Index";
+}
+<link href="~/Content/bootstrap-select.min.css" rel="stylesheet" />
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script src="~/Scripts/bootstrap-select.min.js"></script>
+<script src="~/Scripts/App/Service/StockService.js"></script>
+<script src="~/Scripts/App/Controller/StockController.js"></script>
+<style>
+    .charts-main-title {
+        color: #000000;
+    }
+
+    .breadcrumb-item {
+        color: #000000;
+    }
+
+    .dataTables_wrapper .row:first-child {
+        background-color: #5087c8;
+        color: #ffffff;
+        margin: 0;
+        padding: 10px 0 6px;
+    }
+</style>
+
+<h4 class="charts-main-title">
+    <a href="/Home/Index">My Dashboard</a>
+    <span class="fa fa-arrow-right"></span>
+    <span class="breadcrumb-item">Stock Detail</span>
+</h4>
+<h3>Stock Detail</h3>
+
+<div class="col-sm-6 col-md-3 col-xs-12 input-main-col" id="divMultiSelectCategory">
+    @Html.DropDownList("CategoryId", new SelectList(Model.listCategory, "CategoryId", "CategoryName"), new { @class = "form-control dropdown-arrow selectpicker  changeable", multiple = "multiple", data_actions_box = "true", data_live_search = "true", title = "Select Category" })
+</div>
+
+<div class="col-sm-6 col-md-3 col-xs-12 input-main-col" id="divMultiSelectSubCategory">
+    @Html.DropDownList("SubCategoryId", new SelectList(string.Empty, "Value", "Text"), new { @class = "form-control dropdown-arrow selectpicker  changeable", multiple = "multiple", data_actions_box = "true", data_live_search = "true", title = "Select Sub Category" })
+</div>
+<div class="col-sm-6 col-md-3 col-xs-12 input-main-col" id="divMultiSelectProduct">
+    @Html.DropDownList("ProductId", new SelectList(string.Empty, "Value", "Text"), new { @class = "form-control dropdown-arrow selectpicker  changeable col-md-4", multiple = "multiple", data_actions_box = "true", data_live_search = "true", title = "Select Product" })
+</div>
+<div class="col-sm-6 col-md-3 col-xs-12 input-main-col">
+    <div>
+        <input type="button" class="btn btn-primary" value="Search" onclick="StockController.SearchStock()" />
+    </div>
+</div>
+<div class="clearfix"></div>
+<br />
+<div id="loadStock">
+
+</div>
+
+
+<script>
+    $('#divMultiSelectCategory .selectpicker').on('changed.bs.select', function (e, clickedIndex, newValue, oldValue) {
+        debugger;
+        StockController.RenderSubcategory($(e.currentTarget).val());
+    });
+    $('#SubCategoryId .selectpicker').on('changed.bs.select', function (e, clickedIndex, newValue, oldValue) {
+        debugger;
+        StockController.RenderSubcategory($(e.currentTarget).val());
+    });
+
+    $('.selectpicker').selectpicker('refresh');
+</script>

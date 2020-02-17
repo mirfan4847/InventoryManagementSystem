@@ -1,0 +1,104 @@
+﻿@model IEnumerable<SuperStore.ViewModel.CategoryViewModel>
+@using SuperStore.Common
+
+@{
+    Layout = null;
+    ViewBag.Title = "GetAll";
+    int counter = 1;
+}
+<br />
+
+<table class="table" id="categoryTable">
+    <thead>
+        <tr>
+            <th>Sr#</th>
+            <th>
+                Name
+            </th>
+
+            <th>
+                Created By
+            </th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @(counter++)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CategoryName)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.CreatedName)
+                    <br />
+                    @Html.DisplayFor(modelItem => item.CreatedDate)
+                </td>
+
+                <td>
+                    <table>
+                        <tr>
+                            <td>
+                                <a href="/Category/Edit/@EncryptDecrypt.EncryptId(item.CategoryId.ToString())" class="btn btn-primary">
+
+                                    <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+                                </a>
+                            </td>
+                            <td>
+                                &nbsp;&nbsp;
+                                &nbsp;&nbsp;
+                            </td>
+                            @*<td>
+                                    <a href="/Category/Deactive/@EncryptDecrypt.EncryptId(item.CategoryId.ToString())" class="btn btn-danger">
+
+                                        <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+                                    </a>
+                                </td>*@
+
+                            <td>
+                                @*<input type="button" class="btn transfer-srch-btn btn-sm" value="Close Contract" onclick="ContractController.ChangeAndCloseContractAgainstUser('@detail.DeploymentContractDetailID.ToString()');">*@
+                                @*<button class="btn" title="Close Contract" onclick="ContractController.ChangeAndCloseContractAgainstUser('@detail.DeploymentContractDetailID.ToString()');"><i class="fa fa-times"></i></button>*@
+
+                                <button class="btn btn-danger" id="CloseContract" title="Expire Contract" data-toggle="modal" data-target="#@item.CategoryId"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button>
+
+                            </td>
+
+                        </tr>
+                    </table>
+
+                </td>
+            </tr>
+
+
+            <div id="@item.CategoryId" class="modal fade">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-body">
+                            <br />
+                            <h3 class="text-center">Are you sure you want to delete this category?</h3>
+                        </div>
+                        <div class="modal-footer" style="border-top:none !important;">
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">No</button>
+                            <a href="/Category/Deactive/@EncryptDecrypt.EncryptId(item.CategoryId.ToString())" class="btn btn-success">
+                                Yes
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        }
+    </tbody>
+</table>
+
+<div class="container">
+    <div class="modal fade" id="" role="dialog">
+        <div class="modal-dialog modal-lg">
+        </div>
+    </div>
+</div>
+
